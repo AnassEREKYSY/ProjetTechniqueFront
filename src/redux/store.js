@@ -4,6 +4,9 @@ import { createLogger } from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from "./user/user.reducer";
+import postReducer from "./post/post.reducer";
+import notificationReducer from "./notification/notification.reducer";
+
 
 const logger = createLogger({
     collapsed: true,
@@ -17,6 +20,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     user: userReducer,
+    post: postReducer,
+    notification: notificationReducer,
     
 });
 

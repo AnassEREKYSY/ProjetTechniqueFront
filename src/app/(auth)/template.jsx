@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const variants = {
@@ -13,12 +14,12 @@ export default function Template({ children }) {
 
   const {profile} = useSelector((state) => state.user);
   const router = useRouter();
-  // useEffect(() => {
-  //   if(profile?.user ){
-  //     router.push(`${profile.user.role}/overview`);
-  //   }
-  // }
-  // , [profile]);
+  useEffect(() => {
+    if(profile ){
+      router.push(`/user/feeds`);
+    }
+  }
+  , [profile]);
 
   return (
     <motion.main

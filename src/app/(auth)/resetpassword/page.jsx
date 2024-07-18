@@ -1,7 +1,7 @@
 "use client";
 import Btn from "@/components/Button/Btn";
 import FormInput from "@/components/FormInput/FormInput";
-import { reset_password } from "@/redux/user/user.actions";
+import { resetPasswordAction } from "@/redux/user/user.actions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = new URLSearchParams(window.location.search).get("email");
-    dispatch(reset_password(email, pin, password));
+    dispatch(resetPasswordAction({email, resetToken:pin, newPassword:password}));
   };
   const router = useRouter();
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function LoginPage() {
           Réinitialisation
         </h1>
         <p className="text-gray-600 dark:text-gray-300 text-sm">
-          Saisissez votre code pin reçu par email pour réinitialiser votre mot
+          Saisissez votre code reçu par email pour réinitialiser votre mot
           de passe.
         </p>
       </div>
@@ -60,12 +60,12 @@ export default function LoginPage() {
       <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
         <div>
           <FormInput
-            label="Code Pin"
+            label="Code verification"
             id="pin"
-            type="number"
+            type="text"
             required
             name="pin"
-            placeholder="Saisissez votre code pin"
+            placeholder="Saisissez votre code"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
           />

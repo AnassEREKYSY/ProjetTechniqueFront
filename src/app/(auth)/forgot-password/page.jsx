@@ -1,7 +1,7 @@
 "use client";
 import Btn from "@/components/Button/Btn";
 import FormInput from "@/components/FormInput/FormInput";
-import { forgot_password } from "@/redux/user/user.actions";
+import { forgot_password, forgotPasswordAction } from "@/redux/user/user.actions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(forgot_password(email));
+    dispatch(forgotPasswordAction({email}));
   };
 
   useEffect(() => {

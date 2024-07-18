@@ -1,7 +1,7 @@
 "use client";
 import Btn from "@/components/Button/Btn";
 import FormInput from "@/components/FormInput/FormInput";
-import { loginAction } from "@/redux/user/user.actions";
+import { loginAction, registerAction } from "@/redux/user/user.actions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,21 +10,28 @@ import { useDispatch, useSelector } from "react-redux";
 export default function RegisterPage() {
   const router = useRouter();
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const { loading, profile, error, success } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginAction({ email, password }));
+    dispatch(registerAction({ email, password, firstName, lastName, userName }));
   };
-  // useEffect(() => {
-  //   if (profile) {
-  //     router.push("/admin/overview");
-  //   }
-  // }, [profile]);
+  
+  useEffect(() => {
+    if(success){
+      dispatch(loginAction({ email, password }));
+    }
+  }, [success]);
+  
 
   useEffect(() => {
     dispatch({ type: "RESET_ERROR" });
@@ -53,6 +60,28 @@ export default function RegisterPage() {
       )}
 
       <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+        <div className="flex space-x-4">
+          <FormInput
+            label="Prénom"
+            id="prenom"
+            type="text"
+            required
+            name="prenom"
+            placeholder="Saisissez votre prénom"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <FormInput
+            label="Nom"
+            id="nom"
+            type="text"
+            required
+            name="nom"
+            placeholder="Saisissez votre nom"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
         <div>
           <FormInput
             label="Identifiant"
@@ -61,8 +90,8 @@ export default function RegisterPage() {
             required
             name="username"
             placeholder="Saisissez votre identifiant"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
           />
         </div>
 

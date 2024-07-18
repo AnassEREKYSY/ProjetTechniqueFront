@@ -6,7 +6,8 @@ import OverviewIcon from "@/assets/icons/overview";
 import BuildingIcon from "@/assets/icons/building";
 import ComputerIcon from "@/assets/icons/computer";
 import { useDispatch, useSelector } from "react-redux";
-import {ChatBubbleLeftRightIcon, BellIcon, HomeIcon, UsersIcon, BookmarkIcon} from '@heroicons/react/24/outline'
+import {ChatBubbleLeftRightIcon, BellIcon, HomeIcon, UsersIcon, BookmarkIcon, HashtagIcon, ArrowLeftEndOnRectangleIcon} from '@heroicons/react/24/outline'
+import { USER_TYPES } from "@/redux/user/user.types";
 function SideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -50,6 +51,10 @@ function SideBar() {
 
   };
 
+  const handleLogout = () => {
+    dispatch({type:USER_TYPES.LOGOUT});
+  }
+
   return (
     <>
       {isSidebarOpen && (
@@ -83,6 +88,13 @@ function SideBar() {
                   Icon={BookmarkIcon}
                   active={pathname.includes("/user/bookmarks")}
                 />
+                <SideBarItem
+                  key="notifications"
+                  title="Notifications"
+                  href="/user/notifications"
+                  Icon={HashtagIcon}
+                  active={pathname.includes("/user/notifications")}
+                />
 
                 <SideBarItem
                   key="profile"
@@ -90,6 +102,13 @@ function SideBar() {
                   href="/user/profile"
                   Icon={UsersIcon}
                   active={pathname.includes("/user/profile")}
+                />
+                <SideBarItem
+                  key="logout"
+                  title="Déconnexion"
+                  onClick={handleLogout}
+                  Icon={ArrowLeftEndOnRectangleIcon}
+                  active={pathname.includes("/user/logout")}
                 />
                
               </ul>

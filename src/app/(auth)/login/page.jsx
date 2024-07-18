@@ -20,16 +20,12 @@ export default function LoginPage() {
     e.preventDefault();
     dispatch(loginAction({ email, password }));
   };
-  // useEffect(() => {
-  //   if (profile) {
-  //     router.push("/admin/overview");
-  //   }
-  // }, [profile]);
 
-  useEffect(() => {
-    dispatch({ type: "RESET_ERROR" });
-    dispatch({ type: "RESET_SUCCESS" });
-  }, []);
+
+  // useEffect(() => {
+  //   dispatch({ type: "RESET_ERROR" });
+  //   dispatch({ type: "RESET_SUCCESS" });
+  // }, []);
 
   return (
     <>
@@ -91,11 +87,9 @@ export default function LoginPage() {
         </Btn>
         <div className="mt-2">        
         <Btn
-          type="submit"
+          type="button"
           variation="secondary"
-          disabled={loading}
           tooltip="Connexion"
-          loading={loading}
           onClick={() => router.push("/register")}
         >
           Vous n'avez pas de compte ? Inscrivez-vous

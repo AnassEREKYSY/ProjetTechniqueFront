@@ -9,24 +9,29 @@ import { redirect } from "next/navigation";
 export default function WithAuth(Component, role = 'admin') {
     return function AuthComponent(props) {
         const dispatch = useDispatch();
-        const { profile, loading_profile_error } = useSelector(state => state.user);
+        const { profile, profile_error } = useSelector(state => state.user);
       
         useEffect(() => {
-            if (!loading_profile_error && !profile) {
+            if (!profile_error && !profile) {
                 dispatch(checkUserSession());
             }
-        }, [profile, loading_profile_error]);
+        }, [profile, profile_error]);
 
-        if (loading_profile_error) {
+        if (profile_error) {
             return (
                 <Loading />
             );
         }
 
-        // if (!profile || profile?.user?.role !== role) {
+        
+        // if (!profile || profile?.role.toLowerCase() !== role.toLowerCase()) {
         //     redirect('/login');
         //     return null;
         // }
+        if (!profile ) {
+            redirect('/login');
+            return null;
+        }
 
         return <Component {...props} />;
     };
