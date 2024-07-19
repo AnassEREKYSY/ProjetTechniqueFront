@@ -47,7 +47,7 @@ function Conversation({ params }) {
   };
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [filteredMessages]);
 
   return (
@@ -69,9 +69,18 @@ function Conversation({ params }) {
                 )}
                 <div className={`mr-4 p-2 ${message.sender.id === profile.id ? 'bg-primary-700 text-white' : 'bg-gray-200'} rounded-lg`}>
                   <h1 className="text-md font-semibold">
-                    {message.sender.id === profile.id ? 'You' : `${message.sender.firstName} ${message.sender.lastName}`}
+                  {message.sender.id === profile.id ? 
+                  <span className="text-white">Toi</span> :
+                  <span className="text-stone-700 dark:text-stone-700
+                  ">{message.sender.firstName} {message.sender.lastName}</span>
+                  }
                   </h1>
-                  <p>{message.content}</p>
+                  {
+                    message.sender.id !== profile.id ?
+                  <p className="text-sm text-stone-700">{message.content}</p>
+                    : 
+                    <p className="text-sm">{message.content}</p>
+                  }
                   <p className="text-stone-500 text-sm">{moment(message.timestamp).fromNow()}</p>
                 </div>
                 {message.sender.id === profile.id && (
@@ -95,7 +104,7 @@ function Conversation({ params }) {
             placeholder="Type a message"
           />
           <button
-            className="ml-2 text-white p-2 border rounded-lg hover:bg-primary-100 focus:outline-none"
+            className="ml-2 text-white p-2 border rounded-lg hover:bg-primary-100 focus:outline-none border-stone-700"
             onClick={handleSendMessage}
           >
             <PaperAirplaneIcon className="w-6 h-6 text-stone-500" />

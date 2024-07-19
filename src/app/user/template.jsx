@@ -24,7 +24,7 @@ function UserLayout({ children }) {
           initial="hidden"
           animate="enter"
           transition={{ type: "linear" }}
-          className="w-full overflow-y-auto min-h-screen pb-32"
+          className="w-full overflow-y-auto min-h-screen"
         >
           {children}
         </motion.div>

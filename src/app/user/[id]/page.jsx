@@ -10,6 +10,7 @@ import { getPostsAction } from '@/redux/post/post.actions';
 import { getOneUser } from '@/redux/user/user.actions';
 import { ChatBubbleLeftIcon, PencilIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -54,9 +55,11 @@ function User({params}) {
                     <p className='text-stone-700 '><b>100</b> Suivis</p>
                 </div> */}
                 <div className='ml-auto'>
+                    <Link href={`/user/messages/${params.id}`}>
                     <button className='text-white p-2 border rounded-lg hover:bg-primary-100 focus:outline-none' >
                         <ChatBubbleLeftIcon className='w-6 h-6 text-stone-500' />
                     </button>
+                    </Link>
                     
                 </div>
             </div>

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../FormInput/FormInput";
 import Btn from "../Button/Btn";
 import { BellIcon, MoonIcon, PlusIcon } from "@heroicons/react/24/outline";
 import CreatePost from "../CreatePost/CreatePost";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 
 function Header() {
@@ -14,6 +14,41 @@ function Header() {
   const close = () => {
     setIsOpened(false);
   }
+
+  const dispatch = useDispatch();
+
+
+  const {darkMode} = useSelector((state) => state.application);
+  useEffect(() => {
+    if (localStorage.theme == "dark") {
+      dispatch({ type: "TOGGLE_DARK_MODE", payload: true });
+      localStorage.setItem("flowbite-theme-mode", "dark");
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+    } else {
+      localStorage.theme = "light";
+      localStorage.setItem("flowbite-theme-mode", "light");
+      document.documentElement.classList.remove("dark");
+      dispatch({ type: "TOGGLE_DARK_MODE", payload: false });
+    }
+
+  }, []);
+
+  
+  const handleToggleDarkMode = () => {
+    if (darkMode) {
+      localStorage.theme = "light";
+      localStorage.setItem("flowbite-theme-mode", "light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("flowbite-theme-mode", "dark");
+    }
+    dispatch({ type: "TOGGLE_DARK_MODE", payload: darkMode });
+
+  };
+
 
   return (
     <div className="bg-white dark:bg-stone-800 w-full flex items-center border-b border-stone-200 dark:border-stone-700">
@@ -32,8 +67,10 @@ function Header() {
         </div>
         <div className="flex">
           <div className="mr-4 w-8">
-            <button className="p-3 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-stone-700 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-600 dark:focus:ring-primary-500 dark:focus:text-white rounded-lg border border-stone-300 dark:border-stone-600">
-              <MoonIcon className="w-5 h-5" />
+            <button className="p-3 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-stone-700 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-600 dark:focus:ring-primary-500 dark:focus:text-white rounded-lg border border-stone-300 dark:border-stone-600" onClick={handleToggleDarkMode}>
+              {
+                darkMode ? "🌞" : "🌙"
+              }
             </button>
           </div>
         </div>

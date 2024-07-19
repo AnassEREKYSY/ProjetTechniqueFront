@@ -7,6 +7,7 @@ import userReducer from "./user/user.reducer";
 import postReducer from "./post/post.reducer";
 import notificationReducer from "./notification/notification.reducer";
 import messageReducer from "./message/message.reducer";
+import applicationReducer from "./application/application.reducer";
 
 
 const logger = createLogger({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     post: postReducer,
     notification: notificationReducer,
     message: messageReducer,
+    application: applicationReducer,
     
 });
 

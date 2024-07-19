@@ -9,7 +9,7 @@ function FormInput({ label, id, readonly, type, ...otherProps }) {
         {label && (
           <label
             htmlFor={id}
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-stone-900 dark:text-white"
           >
             {label}
           </label>
@@ -20,9 +20,9 @@ function FormInput({ label, id, readonly, type, ...otherProps }) {
             <input
               type={showPassword ? "text" : "password"}
               id={id}
-              className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 ${
+              className={`bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 ${
                 readonly
-                  ? "bg-gray-300 dark:bg-gray-800 cursor-not-allowed"
+                  ? "bg-stone-300 dark:bg-stone-800 cursor-not-allowed"
                   : ""
               }`}
               {...otherProps}
@@ -34,7 +34,7 @@ function FormInput({ label, id, readonly, type, ...otherProps }) {
             >
               {!showPassword ? (
                 <svg
-                  className="w-6 h-6 text-gray-800 dark:text-white"
+                  className="w-6 h-6 text-stone-800 dark:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -53,7 +53,7 @@ function FormInput({ label, id, readonly, type, ...otherProps }) {
                 </svg>
               ) : (
                 <svg
-                  className="w-6 h-6 text-gray-800 dark:text-white"
+                  className="w-6 h-6 text-stone-800 dark:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -74,8 +74,8 @@ function FormInput({ label, id, readonly, type, ...otherProps }) {
           <input
             type={type}
             id={id}
-            className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-              readonly ? "bg-gray-300 dark:bg-gray-800 cursor-not-allowed" : ""
+            className={`bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+              readonly ? "bg-stone-300 dark:bg-stone-800 cursor-not-allowed" : ""
             }`}
             {...otherProps}
           />
